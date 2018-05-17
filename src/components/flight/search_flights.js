@@ -11,6 +11,8 @@ import flight_itenerary_card from './cards/flight_itenerary.json';
 import flight_data from './cards/flight_data.json';
 import FlightList from "./flight_list";
 
+import AdaptiveCard from 'react-adaptivecards';
+
 
 class SearchFlights extends Component {
 
@@ -50,6 +52,7 @@ class SearchFlights extends Component {
         this.setOnExecuteAction = this.setOnExecuteAction.bind(this);
     }
 
+
     componentDidMount() {
         this.renderCard(this.state.cards[this.state.counter]);
     }
@@ -65,6 +68,7 @@ class SearchFlights extends Component {
         var renderedCard = this.adaptiveCard.render();
 
         this.refs.flight_card.appendChild(renderedCard);
+
     }
 
     setOnExecuteAction(adaptiveCard) {
@@ -125,6 +129,7 @@ class SearchFlights extends Component {
         let destinations = this.state.destinations;
         let codes = this.state.destinationsCodes;
         let seatClasses = this.state.seatClasses;
+        console.log(currentBooking.seatClass);
         return JSON.parse(Mustach.render(JSON.stringify(flight_itenerary_card),
             {
                 from: destinations[currentBooking.from - 1],
@@ -186,7 +191,7 @@ class SearchFlights extends Component {
         return (
             <div>
                 <Row>
-                    <Col md={8} mdOffset={2}>
+                    <Col md={6} mdOffset={3}>
                         <div className="flight_card" ref="flight_card" hidden={this.state.showSearchCards}></div>
                         <FlightList flights={this.state.flights} hidden={this.state.showFlights}/>
                     </Col>
