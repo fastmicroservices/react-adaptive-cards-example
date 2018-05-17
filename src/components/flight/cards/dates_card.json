@@ -1,0 +1,88 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Image",
+          "url": "https://vignette.wikia.nocookie.net/logopedia/images/5/5c/Traveloka_2014.png/revision/latest?cb=20170404023338",
+          "size": "medium",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Find a flight",
+          "weight": "bolder",
+          "size": "medium"
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Departure:"
+                },
+                {
+                  "type": "Input.Date",
+                  "id": "departure",
+                  "placeholder": "Enter a date",
+                  "value": "{{departure}}"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "https://cdn3.iconfinder.com/data/icons/website-panel-icons/128/test1-13-256.png",
+                  "size": "small",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Return:"
+                },
+                {
+                  "type": "Input.Date",
+                  "id": "arrival",
+                  "placeholder": "Enter a date",
+                  "value": "{{arrival}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Previous step"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Next step"
+    }
+  ]
+}

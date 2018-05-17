@@ -1,0 +1,118 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Image",
+          "url": "https://vignette.wikia.nocookie.net/logopedia/images/5/5c/Traveloka_2014.png/revision/latest?cb=20170404023338",
+          "size": "medium",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Find a flight",
+          "weight": "bolder",
+          "size": "medium"
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "From:"
+                },
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "from",
+                  "style": "compact",
+                  "isMultiSelect": false,
+                  "value": "{{fromValue}}",
+                  "choices": [
+                    {
+                      "title": "Jakarta",
+                      "value": "1"
+                    },
+                    {
+                      "title": "Bali/Denpasar",
+                      "value": "2"
+                    },
+                    {
+                      "title": "Bangkok",
+                      "value": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                  "size": "small",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "To:"
+                },
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "to",
+                  "style": "compact",
+                  "isMultiSelect": false,
+                  "value": "{{toValue}}",
+                  "choices": [
+                    {
+                      "title": "Jakarta",
+                      "value": "1"
+                    },
+                    {
+                      "title": "Bali/Denpasar",
+                      "value": "2"
+                    },
+                    {
+                      "title": "Bangkok",
+                      "value": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Previous step"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Next step"
+    }
+  ]
+}

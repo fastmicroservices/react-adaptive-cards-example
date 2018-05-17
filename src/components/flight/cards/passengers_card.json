@@ -1,0 +1,139 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Image",
+          "url": "https://vignette.wikia.nocookie.net/logopedia/images/5/5c/Traveloka_2014.png/revision/latest?cb=20170404023338",
+          "size": "medium",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Find a flight",
+          "weight": "bolder",
+          "size": "medium"
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": "1",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "No. of Passengers:"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Adult:"
+                },
+                {
+                  "type": "Input.Number",
+                  "id": "adult",
+                  "placeholder": "Enter a number",
+                  "min": 1,
+                  "value": "{{adult}}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Child:"
+                },
+                {
+                  "type": "Input.Number",
+                  "id": "child",
+                  "placeholder": "Enter a number",
+                  "min": 1,
+                  "value": "{{child}}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Infant:"
+                },
+                {
+                  "type": "Input.Number",
+                  "id": "infant",
+                  "placeholder": "Enter a number",
+                  "min": 1,
+                  "value": "{{infant}}"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "https://image.flaticon.com/icons/svg/189/189080.svg",
+                  "size": "small",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "1",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "In flight options:",
+                  "spacing": "large"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Seat Class:"
+                },
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "seatClass",
+                  "style": "compact",
+                  "isMultiSelect": false,
+                  "value": "{{seatClass}}",
+                  "choices": [
+                    {
+                      "title": "Economy",
+                      "value": "1"
+                    },
+                    {
+                      "title": "Premium Economy",
+                      "value": "2"
+                    },
+                    {
+                      "title": "Business",
+                      "value": "3"
+                    },
+                    {
+                      "title": "First Class",
+                      "value": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Previous step"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Search Flights"
+    }
+  ]
+}

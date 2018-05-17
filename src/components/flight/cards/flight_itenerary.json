@@ -1,0 +1,208 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Image",
+      "url": "https://seeklogo.com/images/A/Air_Asia-logo-5ACDC17858-seeklogo.com.png",
+      "size": "medium",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Passengers",
+      "weight": "bolder",
+      "isSubtle": false
+    },
+    {
+      "type": "TextBlock",
+      "text": "Adults: {{adults}}",
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Children: {{children}}",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Infants: {{infants}}",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Seat Class: {{seatClass}}",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "{{departure}} {{departureTime}}",
+      "weight": "bolder",
+      "spacing": "medium"
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "{{from}}",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "{{fromInitials}}",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+              "size": "small",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "horizontalAlignment": "right",
+              "text": "{{to}}",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "horizontalAlignment": "right",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "{{toInitials}}",
+              "spacing": "none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "{{return}} {{returnTime}}",
+      "weight": "bolder",
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "{{to}}",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "{{toInitials}}",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+              "size": "small",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "horizontalAlignment": "right",
+              "text": "{{from}}",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "horizontalAlignment": "right",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "{{fromInitials}}",
+              "spacing": "none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "spacing": "medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "1",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Total",
+              "size": "medium",
+              "isSubtle": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "horizontalAlignment": "right",
+              "text": "{{price}}",
+              "size": "medium",
+              "weight": "bolder"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Go to website"
+    }
+  ]
+}

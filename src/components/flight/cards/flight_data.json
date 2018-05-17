@@ -1,0 +1,17 @@
+[
+  {
+    "departureTime": "8:30 AM",
+    "returnTime": "5.30 PM",
+    "price": "$ 550.89"
+  },
+  {
+    "departureTime": "7:25 AM",
+    "returnTime": "7.50 PM",
+    "price": "$ 609.20"
+  },
+  {
+    "departureTime": "5:10 AM",
+    "returnTime": "3.15 PM",
+    "price": "$ 452.63"
+  }
+]
