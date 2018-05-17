@@ -12,7 +12,6 @@ import flight_data from './cards/flight_data.json';
 import FlightList from "./flight_list";
 
 
-
 class SearchFlights extends Component {
 
     constructor() {
@@ -43,33 +42,29 @@ class SearchFlights extends Component {
             showSearchCards: false
         };
 
+        this.adaptiveCard = new AdaptiveCards.AdaptiveCard();
+        this.adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
+            fontFamily: "Segoe UI, Helvetica Neue, sans-serif"
+        });
+
         this.setOnExecuteAction = this.setOnExecuteAction.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.renderCard(this.state.cards[this.state.counter]);
     }
 
     renderCard(card) {
-        if (this.state.counter < this.state.cards.length && this.state.counter >= 0) {
-            this.refs.flight_card.innerHTML="";
-            card = this.replaceValuesDynamically(card);
-            // Create an AdaptiveCard instance
-            var adaptiveCard = new AdaptiveCards.AdaptiveCard();
+        this.refs.flight_card.innerHTML = "";
+        card = this.replaceValuesDynamically(card);
 
-            adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
-                fontFamily: "Segoe UI, Helvetica Neue, sans-serif"
-                // More host config options
-            });
+        this.setOnExecuteAction(this.adaptiveCard);
 
-            this.setOnExecuteAction(adaptiveCard);
+        this.adaptiveCard.parse(card);
 
-            adaptiveCard.parse(card);
+        var renderedCard = this.adaptiveCard.render();
 
-            var renderedCard = adaptiveCard.render();
-
-            this.refs.flight_card.appendChild(renderedCard);
-        }
+        this.refs.flight_card.appendChild(renderedCard);
     }
 
     setOnExecuteAction(adaptiveCard) {
@@ -88,61 +83,64 @@ class SearchFlights extends Component {
     onNextStepAction(adaptiveCard, count, action) {
         let currentBooking = this.saveValues(action, count);
         count++;
-        this.setState({counter: count, booking: currentBooking}, function () {
-            this.renderCard(this.state.cards[this.state.counter]);
-        });
+        if (count < this.state.cards.length && count >= 0) {
+            this.setState({counter: count, booking: currentBooking}, function () {
+                this.renderCard(this.state.cards[this.state.counter]);
+            });
+        }
     }
 
     onPreviousStepAction(adaptiveCard, count, action) {
         let currentBooking = this.saveValues(action, count);
         count--;
-        this.setState({counter: count, booking: currentBooking}, function () {
-            this.renderCard(this.state.cards[this.state.counter]);
-        });
+        if (count < this.state.cards.length && count >= 0) {
+            this.setState({counter: count, booking: currentBooking}, function () {
+                this.renderCard(this.state.cards[this.state.counter]);
+            });
+        }
     }
 
     onSearchFlights(adaptiveCard, action) {
         let currentBooking = this.saveValues(action);
-        this.generateFlightIteneraries(currentBooking);
+        this.generateFlightItineraries(currentBooking);
 
     }
 
-    generateFlightIteneraries(currentBooking) {
+    generateFlightItineraries(currentBooking) {
         var flightList = [];
         var flight;
-        let destinations = this.state.destinations;
-        let codes = this.state.destinationsCodes;
-        let seatClasses = this.state.seatClasses;
         for (var key in flight_data) {
-            flight = JSON.parse(Mustach.render(JSON.stringify(flight_itenerary_card),
-                {
-                    from: destinations[currentBooking.from - 1],
-                    to: destinations[currentBooking.to - 1],
-                    fromInitials: codes[currentBooking.from - 1],
-                    toInitials: codes[currentBooking.to - 1],
-                    departure: currentBooking.departureDate,
-                    departureTime: flight_data[key].departureTime,
-                    return: currentBooking.arrivalDate,
-                    returnTime: flight_data[key].returnTime,
-                    adults: currentBooking.passengers.adult,
-                    children: currentBooking.passengers.child,
-                    infants: currentBooking.passengers.infant,
-                    seatClass: seatClasses[currentBooking.seatClass - 1],
-                    price: flight_data[key].price
-                }));
+            flight = this.getFlightItinerary(currentBooking, flight_data[key]);
 
-            var adaptiveCard = new AdaptiveCards.AdaptiveCard();
-            adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
-                fontFamily: "Segoe UI, Helvetica Neue, sans-serif"
-            });
-
-            adaptiveCard.parse(flight);
-            var flightCard = adaptiveCard.render();
+            this.adaptiveCard.parse(flight);
+            var flightCard = this.adaptiveCard.render();
 
             flightList.push(flightCard);
         }
 
         this.setState({flights: flightList, showFlights: false, showSearchCards: true});
+    }
+
+    getFlightItinerary(currentBooking, data) {
+        let destinations = this.state.destinations;
+        let codes = this.state.destinationsCodes;
+        let seatClasses = this.state.seatClasses;
+        return JSON.parse(Mustach.render(JSON.stringify(flight_itenerary_card),
+            {
+                from: destinations[currentBooking.from - 1],
+                to: destinations[currentBooking.to - 1],
+                fromInitials: codes[currentBooking.from - 1],
+                toInitials: codes[currentBooking.to - 1],
+                departure: currentBooking.departureDate,
+                departureTime: data.departureTime,
+                return: currentBooking.arrivalDate,
+                returnTime: data.returnTime,
+                adults: currentBooking.passengers.adult,
+                children: currentBooking.passengers.child,
+                infants: currentBooking.passengers.infant,
+                seatClass: seatClasses[currentBooking.seatClass - 1],
+                price: data.price
+            }));
     }
 
     replaceValuesDynamically(card) {
@@ -180,7 +178,6 @@ class SearchFlights extends Component {
             currentBooking.passengers.child = action.data.child;
             currentBooking.passengers.infant = action.data.infant;
         }
-
         return currentBooking;
     }
 
