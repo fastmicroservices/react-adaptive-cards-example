@@ -11,7 +11,6 @@ import flight_itenerary_card from './cards/flight_itenerary.json';
 import flight_data from './cards/flight_data.json';
 import FlightList from "./flight_list";
 
-import AdaptiveCard from 'react-adaptivecards';
 
 
 class SearchFlights extends Component {
