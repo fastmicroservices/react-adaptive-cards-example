@@ -1,5 +1,6 @@
 .ac-container{
-    background-color:white;
+    background-size: 100% 100% !important;
+    background-color: #DCF0F7;
 }
 
 ul{
@@ -9,5 +10,8 @@ ul{
 
 ul li {
     margin-top: 10px;
-    border: 1px solid black;
+}
+
+.flight_card{
+    margin-top:10px;
 }

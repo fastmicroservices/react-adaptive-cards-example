@@ -12,7 +12,7 @@ class App extends Component {
                     <Navigation/>
                 </header>*/}
                 <Grid fluid>
-                    <SearchFlights/>
+                    <SearchFlights className="searchFlighs"/>
                 </Grid>
             </div>
 

@@ -37,7 +37,7 @@
     },
     {
       "type": "TextBlock",
-      "text": "{{departure}} {{departureTime}}",
+      "text": "{{departure}} - {{departureTime}}",
       "weight": "bolder",
       "spacing": "medium"
     },
@@ -103,7 +103,7 @@
     },
     {
       "type": "TextBlock",
-      "text": "{{return}} {{returnTime}}",
+      "text": "{{return}} - {{returnTime}}",
       "weight": "bolder",
       "spacing": "none"
     },
@@ -202,7 +202,7 @@
   "actions": [
     {
       "type": "Action.Submit",
-      "title": "Go to website"
+      "title": "Book flight"
     }
   ]
 }

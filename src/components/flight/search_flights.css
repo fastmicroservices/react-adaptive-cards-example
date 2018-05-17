@@ -1,9 +1,15 @@
 .flight_card{
-    background-color: #ffffff;
-    border: 1px solid black;
 }
 
 .ac-pushButton{
 
 }
 
+.col-md-12{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+img{
+    width: 100%;
+}

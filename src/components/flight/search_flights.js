@@ -8,7 +8,8 @@ import destination_card from './cards/destination_card.json';
 import dates_card from './cards/dates_card.json';
 import passengers_card from './cards/passengers_card.json';
 import flight_itenerary_card from './cards/flight_itenerary.json';
-import flight_data from './cards/flight_data.json';
+import flight_data from './data/flight_data.json';
+import home_card from './cards/home_card.json';
 import FlightList from "./flight_list";
 
 
@@ -33,7 +34,7 @@ class SearchFlights extends Component {
                     "infant": 0
                 }
             },
-            cards: [destination_card, dates_card, passengers_card],
+            cards: [home_card, destination_card, dates_card, passengers_card],
             destinations: ['Jakarta', 'Bali/Denpasar', 'Bangkok'],
             destinationsCodes: ['CGK', 'DPS', 'BKK'],
             seatClasses: ['Economy', 'Premium Economy', 'Business', 'First Class'],
@@ -58,8 +59,10 @@ class SearchFlights extends Component {
 
     renderCard(card) {
         this.refs.flight_card.innerHTML = "";
-        card = this.replaceValuesDynamically(card);
 
+        if(this.state.counter !== 0) {
+            card = this.replaceValuesDynamically(card);
+        }
         this.setOnExecuteAction(this.adaptiveCard);
 
         this.adaptiveCard.parse(card);
@@ -67,24 +70,28 @@ class SearchFlights extends Component {
         var renderedCard = this.adaptiveCard.render();
 
         this.refs.flight_card.appendChild(renderedCard);
-
     }
 
     setOnExecuteAction(adaptiveCard) {
         adaptiveCard.onExecuteAction = function (action) {
             let count = this.state.counter;
-            if (action.title === 'Next step') {
+            if (action.title === 'Next') {
                 this.onNextStepAction(adaptiveCard, count, action);
-            } else if (action.title === 'Previous step') {
+            } else if (action.title === 'Previous') {
                 this.onPreviousStepAction(adaptiveCard, count, action);
-            } else if (action.title === 'Search Flights') {
+            } else if (action.title === 'Search') {
                 this.onSearchFlights(adaptiveCard, action)
+            }else if (action.title === 'Search Flights'){
+                this.onNextStepAction(adaptiveCard, count, action);
             }
         }.bind(this);
     }
 
     onNextStepAction(adaptiveCard, count, action) {
-        let currentBooking = this.saveValues(action, count);
+        let currentBooking = this.state.booking;
+        if(count !== 0) {
+            currentBooking = this.saveValues(action, count);
+        }
         count++;
         if (count < this.state.cards.length && count >= 0) {
             this.setState({counter: count, booking: currentBooking}, function () {
@@ -128,7 +135,6 @@ class SearchFlights extends Component {
         let destinations = this.state.destinations;
         let codes = this.state.destinationsCodes;
         let seatClasses = this.state.seatClasses;
-        console.log(currentBooking.seatClass);
         return JSON.parse(Mustach.render(JSON.stringify(flight_itenerary_card),
             {
                 from: destinations[currentBooking.from - 1],
@@ -149,14 +155,17 @@ class SearchFlights extends Component {
 
     replaceValuesDynamically(card) {
         let booking = this.state.booking;
-        if (this.state.counter === 0) {
-            return JSON.parse(Mustach.render(JSON.stringify(card), {fromValue: booking.from, toValue: booking.to}));
-        } else if (this.state.counter === 1) {
+        if (this.state.counter === 1) {
+            return JSON.parse(Mustach.render(JSON.stringify(card), {
+                fromValue: booking.from,
+                toValue: booking.to
+            }));
+        } else if (this.state.counter === 2) {
             return JSON.parse(Mustach.render(JSON.stringify(card), {
                 departure: booking.departureDate,
                 arrival: booking.arrivalDate
             }));
-        } else if (this.state.counter === 2) {
+        } else if (this.state.counter === 3) {
             return JSON.parse(Mustach.render(JSON.stringify(card), {
                 adult: booking.passengers.adult,
                 child: booking.passengers.child,
@@ -170,13 +179,13 @@ class SearchFlights extends Component {
 
     saveValues(action) {
         let currentBooking = this.state.booking;
-        if (this.state.counter === 0) {
+        if (this.state.counter === 1) {
             currentBooking.from = action.data.from;
             currentBooking.to = action.data.to;
-        } else if (this.state.counter === 1) {
+        } else if (this.state.counter === 2) {
             currentBooking.departureDate = action.data.departure;
             currentBooking.arrivalDate = action.data.arrival;
-        } else if (this.state.counter === 2) {
+        } else if (this.state.counter === 3) {
             currentBooking.seatClass = action.data.seatClass;
             currentBooking.passengers.adult = action.data.adult;
             currentBooking.passengers.child = action.data.child;
@@ -190,7 +199,10 @@ class SearchFlights extends Component {
         return (
             <div>
                 <Row>
-                    <Col md={6} mdOffset={3}>
+                    <Col md={12} >
+                        <img src={require(`./general.png`)} alt="" />
+                    </Col>
+                    <Col ref="flight_col" md={12} >
                         <div className="flight_card" ref="flight_card" hidden={this.state.showSearchCards}></div>
                         <FlightList flights={this.state.flights} hidden={this.state.showFlights}/>
                     </Col>

@@ -129,11 +129,11 @@
   "actions": [
     {
       "type": "Action.Submit",
-      "title": "Previous step"
+      "title": "Previous"
     },
     {
       "type": "Action.Submit",
-      "title": "Search Flights"
+      "title": "Search"
     }
   ]
 }

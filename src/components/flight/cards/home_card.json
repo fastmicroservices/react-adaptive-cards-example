@@ -1,0 +1,44 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Image",
+          "url": "https://vignette.wikia.nocookie.net/logopedia/images/5/5c/Traveloka_2014.png/revision/latest?cb=20170404023338",
+          "size": "large",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "**Current Deals:**",
+          "size": "small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "_DMK - CGK: now only $105.55_",
+          "size": "small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "_CGK - KUL: now only $175.32_",
+          "size": "small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "_BKK - KUL: now only $155.98_",
+          "size": "small"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Search Flights"
+    }
+  ]
+}
